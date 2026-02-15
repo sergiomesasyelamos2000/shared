@@ -1,0 +1,19 @@
+{
+  "name": "@sergiomesasyelamos2000/shared",
+  "version": "1.0.2",
+  "description": "Shared package",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sergiomesasyelamos2000/shared.git"
+  }
+}
