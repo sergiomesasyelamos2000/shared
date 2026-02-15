@@ -1,12 +1,24 @@
 {
   "name": "@sergiomesasyelamos2000/shared",
-  "version": "1.0.2",
-  "description": "Shared package",
-  "main": "index.js",
+  "version": "1.1.0",
+  "description": "Shared API contracts for Gym Tracker (frontend/backend)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "index.js"
+    "dist"
   ],
-  "keywords": [],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "contracts",
+    "shared-types",
+    "nestjs",
+    "react-native"
+  ],
   "author": "",
   "license": "ISC",
   "publishConfig": {
@@ -15,5 +27,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/sergiomesasyelamos2000/shared.git"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
   }
 }
