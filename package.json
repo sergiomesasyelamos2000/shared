@@ -1,6 +1,6 @@
 {
   "name": "@sergiomesasyelamos2000/shared",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Shared API contracts for Gym Tracker (frontend/backend)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
