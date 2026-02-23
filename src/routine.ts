@@ -1,10 +1,13 @@
 import { EntityTimestamps } from "./common";
 
+export type SetType = "warmup" | "normal" | "failed" | "drop";
+
 export interface SetRequest {
   id: string;
   order: number;
   weight: number;
   reps: number;
+  setType?: SetType;
   repsMin?: number;
   repsMax?: number;
   completed?: boolean;
@@ -72,6 +75,7 @@ export interface RoutineSessionExercise {
     reps: number;
     completed: boolean;
     isRecord?: boolean;
+    setType?: SetType;
   }>;
 }
 
@@ -113,6 +117,7 @@ export interface RoutineSessionRequest {
       reps: number;
       completed: boolean;
       isRecord?: boolean;
+      setType?: SetType;
     }>;
   }>;
 }
