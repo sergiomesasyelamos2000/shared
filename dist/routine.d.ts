@@ -5,6 +5,7 @@ export interface SetRequest {
     order: number;
     weight: number;
     reps: number;
+    assistedReps?: number;
     setType?: SetType;
     repsMin?: number;
     repsMax?: number;
