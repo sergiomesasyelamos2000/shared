@@ -32,6 +32,7 @@ export interface ExerciseRequest {
   repsType?: "reps" | "range";
   supersetWith?: string;
   order?: number;
+  videoUrl?: string;
 }
 
 export interface RoutineRequest {

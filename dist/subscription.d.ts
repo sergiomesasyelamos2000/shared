@@ -15,8 +15,8 @@ export declare enum SubscriptionStatus {
 export interface Subscription {
     id: string;
     userId: string;
-    lemonCustomerId?: string;
-    lemonSubscriptionId?: string;
+    stripeCustomerId?: string;
+    stripeSubscriptionId?: string;
     plan: SubscriptionPlan;
     status: SubscriptionStatus;
     currentPeriodStart?: string | Date;
@@ -51,7 +51,6 @@ export interface CreateCheckoutSessionRequest {
 }
 export interface VerifyPaymentRequest {
     sessionId: string;
-    planId?: SubscriptionPlan;
 }
 export interface CancelSubscriptionRequest {
     cancelImmediately?: boolean;
