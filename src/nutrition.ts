@@ -332,6 +332,112 @@ export interface MappedProduct {
   others: MappedNutrient[];
 }
 
+// --- Nutrition plans ---
+
+export type NutritionPlanStatus = "draft" | "active" | "archived";
+
+export interface NutritionPlanMacroTotals {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+}
+
+export interface NutritionPlanFoodItem {
+  name: string;
+  quantity: number;
+  unit: string;
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  notes?: string;
+}
+
+export interface NutritionPlanMeal {
+  mealType: MealType;
+  name: string;
+  foods: NutritionPlanFoodItem[];
+  totals: NutritionPlanMacroTotals;
+  instructions?: string;
+}
+
+export interface NutritionPlanDay {
+  dayIndex: number;
+  label: string;
+  isTrainingDay: boolean;
+  meals: NutritionPlanMeal[];
+  dailyTotals: NutritionPlanMacroTotals;
+}
+
+export interface NutritionPlanMacroSnapshot {
+  dailyCalories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+}
+
+export interface NutritionPlanAiMetadata {
+  provider: "gemini" | "groq";
+  model: string;
+  generatedAt: string;
+  promptVersion: string;
+}
+
+export interface NutritionPlanData {
+  version: 1;
+  dailyTargets: NutritionPlanMacroTotals;
+  days: NutritionPlanDay[];
+  ai?: NutritionPlanAiMetadata;
+}
+
+export interface GenerateNutritionPlanRequest {
+  userId: string;
+  durationDays?: number;
+  name?: string;
+  preferences?: {
+    dietaryRestrictions?: string;
+    excludedFoods?: string;
+    additionalNotes?: string;
+  };
+}
+
+export interface CreateNutritionPlanRequest {
+  userId: string;
+  name: string;
+  description?: string;
+  status?: NutritionPlanStatus;
+  durationDays: number;
+  planData: NutritionPlanData;
+  macroSnapshot?: NutritionPlanMacroSnapshot;
+}
+
+export interface UpdateNutritionPlanRequest {
+  userId?: string;
+  name?: string;
+  description?: string;
+  status?: NutritionPlanStatus;
+  durationDays?: number;
+  planData?: NutritionPlanData;
+}
+
+export interface NutritionPlanResponse {
+  id: string;
+  userId: string;
+  name: string;
+  description?: string;
+  status: NutritionPlanStatus;
+  durationDays: number;
+  planData: NutritionPlanData;
+  macroSnapshot: NutritionPlanMacroSnapshot | null;
+  avgDailyCalories: number;
+  avgDailyProtein: number;
+  avgDailyCarbs: number;
+  avgDailyFat: number;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+}
+
 // Backward-compatible aliases (temporary during migration)
 export type UserNutritionProfileResponseDto = UserNutritionProfileResponse;
 export type CreateUserNutritionProfileDto = CreateUserNutritionProfileRequest;
@@ -355,3 +461,9 @@ export type CustomMealResponseDto = CustomMealResponse;
 export type FavoriteProductResponseDto = FavoriteProductResponse;
 export type ShoppingListItemResponseDto = ShoppingListItem;
 export type MappedProductDto = MappedProduct;
+export type NutritionPlanStatusDto = NutritionPlanStatus;
+export type NutritionPlanDataDto = NutritionPlanData;
+export type NutritionPlanResponseDto = NutritionPlanResponse;
+export type GenerateNutritionPlanRequestDto = GenerateNutritionPlanRequest;
+export type CreateNutritionPlanDto = CreateNutritionPlanRequest;
+export type UpdateNutritionPlanDto = UpdateNutritionPlanRequest;
