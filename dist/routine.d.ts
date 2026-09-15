@@ -33,6 +33,7 @@ export interface ExerciseRequest {
     repsType?: "reps" | "range";
     supersetWith?: string;
     order?: number;
+    videoUrl?: string;
 }
 export interface RoutineRequest {
     id?: string;
@@ -61,6 +62,7 @@ export interface RoutineResponse extends EntityTimestamps {
     userId?: string;
     title: string;
     createdAt: string | Date;
+    sortOrder?: number;
     totalSets?: number;
     totalExercises?: number;
     isPublic?: boolean;
@@ -72,6 +74,7 @@ export interface RoutineSessionExercise {
     name: string;
     imageUrl?: string;
     giftUrl?: string;
+    restSeconds?: string;
     sets: Array<{
         weight: number;
         reps: number;
@@ -91,8 +94,22 @@ export interface RoutineSession {
     totalTime: number;
     totalWeight: number;
     completedSets: number;
+    /** Average heart rate (bpm) during the session, if available. */
+    avgHeartRate?: number | null;
+    /** Peak heart rate (bpm) during the session, if available. */
+    maxHeartRate?: number | null;
+    /** Active calories burned during the session (kcal). */
+    caloriesBurned?: number | null;
+    /** Where calories/HR came from: healthkit | health_connect | met_estimate */
+    healthMetricsSource?: string | null;
     createdAt: string | Date;
     _isPending?: boolean;
+}
+/** Lightweight session row for macros burn / TDEE suggestion (no exercises payload). */
+export interface RoutineSessionBurnSummary {
+    id: string;
+    createdAt: string | Date;
+    caloriesBurned?: number | null;
 }
 export interface RoutineHealthResponse {
     message: string;
@@ -103,12 +120,17 @@ export interface RoutineSessionRequest {
     totalTime: number;
     totalWeight: number;
     completedSets: number;
+    avgHeartRate?: number | null;
+    maxHeartRate?: number | null;
+    caloriesBurned?: number | null;
+    healthMetricsSource?: string | null;
     exercises?: Array<{
         exerciseId: string;
         exerciseName?: string;
         name?: string;
         imageUrl?: string;
         giftUrl?: string;
+        restSeconds?: string;
         totalWeight?: number;
         totalReps?: number;
         sets: Array<{
