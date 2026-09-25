@@ -63,11 +63,39 @@ export interface RoutineResponse extends EntityTimestamps {
     title: string;
     createdAt: string | Date;
     sortOrder?: number;
+    /** Present when the routine belongs to a folder; null/undefined = root. */
+    folderId?: string | null;
     totalSets?: number;
     totalExercises?: number;
     isPublic?: boolean;
     routineExercises?: RoutineExerciseResponse[];
     _isPending?: boolean;
+}
+export type RoutineLayoutItemType = "routine" | "folder";
+export interface RoutineLayoutItem {
+    type: RoutineLayoutItemType;
+    id: string;
+}
+export interface RoutineFolderLayoutEntry {
+    id: string;
+    title: string;
+    routineIds: string[];
+}
+export interface RoutineLayoutRequest {
+    rootOrder: RoutineLayoutItem[];
+    folders: RoutineFolderLayoutEntry[];
+}
+export interface RoutineFolderResponse extends EntityTimestamps {
+    id: string;
+    title: string;
+    sortOrder: number;
+    routineIds: string[];
+}
+export interface CreateRoutineFolderRequest {
+    title: string;
+}
+export interface RenameRoutineFolderRequest {
+    title: string;
 }
 export interface RoutineSessionExercise {
     exerciseId: string;
@@ -159,4 +187,8 @@ export type RoutineExerciseResponseDto = RoutineExerciseResponse;
 export type RoutineSessionEntity = RoutineSession;
 export type RoutineSessionRequestDto = RoutineSessionRequest;
 export type RoutineHealthResponseDto = RoutineHealthResponse;
+export type RoutineFolderResponseDto = RoutineFolderResponse;
+export type RoutineLayoutRequestDto = RoutineLayoutRequest;
+export type CreateRoutineFolderRequestDto = CreateRoutineFolderRequest;
+export type RenameRoutineFolderRequestDto = RenameRoutineFolderRequest;
 //# sourceMappingURL=routine.d.ts.map
