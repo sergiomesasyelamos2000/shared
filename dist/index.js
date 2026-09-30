@@ -19,4 +19,5 @@ __exportStar(require("./auth"), exports);
 __exportStar(require("./exercises"), exports);
 __exportStar(require("./routine"), exports);
 __exportStar(require("./nutrition"), exports);
+__exportStar(require("./mealCollageLayout"), exports);
 __exportStar(require("./subscription"), exports);

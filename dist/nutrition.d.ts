@@ -215,14 +215,20 @@ export interface CreateCustomMealRequest {
     userId: string;
     name: string;
     description?: string;
-    image?: string;
+    /** User photo (data URL / remote). Omit for auto collage. Null clears on update. */
+    image?: string | null;
+    /** user = keep/upload photo; auto = server builds product collage */
+    imageKind?: "user" | "auto";
     products: MealProduct[];
 }
 export interface UpdateCustomMealRequest {
     userId?: string;
     name?: string;
     description?: string;
-    image?: string;
+    /** User photo (data URL / remote). Null clears and triggers collage when imageKind=auto. */
+    image?: string | null;
+    /** user = keep/upload photo; auto = server builds product collage */
+    imageKind?: "user" | "auto";
     products?: MealProduct[];
 }
 export interface CustomMealResponse {
@@ -231,6 +237,8 @@ export interface CustomMealResponse {
     name: string;
     description?: string;
     image?: string;
+    /** How meal.image was produced. Null = legacy row. */
+    imageSource?: "user" | "collage" | null;
     products: MealProduct[];
     totalCalories: number;
     totalProtein: number;
