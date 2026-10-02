@@ -289,6 +289,26 @@ export interface CustomMealResponse {
   updatedAt: string | Date;
 }
 
+/** List payload without nested products JSON. */
+export interface CustomMealListItem {
+  id: string;
+  userId: string;
+  name: string;
+  description?: string;
+  image?: string;
+  imageSource?: "user" | "collage" | null;
+  productCount: number;
+  totalCalories: number;
+  totalProtein: number;
+  totalCarbs: number;
+  totalFat: number;
+  totalSugar?: number | null;
+  totalFiber?: number | null;
+  totalSodium?: number | null;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+}
+
 export interface FavoriteProductResponse {
   id: string;
   userId: string;
@@ -448,6 +468,23 @@ export interface NutritionPlanResponse {
   updatedAt: string | Date;
 }
 
+/** List payload without full planData days/meals. */
+export interface NutritionPlanListItem {
+  id: string;
+  userId: string;
+  name: string;
+  description?: string;
+  status: NutritionPlanStatus;
+  durationDays: number;
+  macroSnapshot: NutritionPlanMacroSnapshot | null;
+  avgDailyCalories: number;
+  avgDailyProtein: number;
+  avgDailyCarbs: number;
+  avgDailyFat: number;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+}
+
 // Backward-compatible aliases (temporary during migration)
 export type UserNutritionProfileResponseDto = UserNutritionProfileResponse;
 export type CreateUserNutritionProfileDto = CreateUserNutritionProfileRequest;
@@ -468,12 +505,14 @@ export type CustomProductResponseDto = CustomProductResponse;
 export type CreateCustomMealDto = CreateCustomMealRequest;
 export type UpdateCustomMealDto = UpdateCustomMealRequest;
 export type CustomMealResponseDto = CustomMealResponse;
+export type CustomMealListItemDto = CustomMealListItem;
 export type FavoriteProductResponseDto = FavoriteProductResponse;
 export type ShoppingListItemResponseDto = ShoppingListItem;
 export type MappedProductDto = MappedProduct;
 export type NutritionPlanStatusDto = NutritionPlanStatus;
 export type NutritionPlanDataDto = NutritionPlanData;
 export type NutritionPlanResponseDto = NutritionPlanResponse;
+export type NutritionPlanListItemDto = NutritionPlanListItem;
 export type GenerateNutritionPlanRequestDto = GenerateNutritionPlanRequest;
 export type CreateNutritionPlanDto = CreateNutritionPlanRequest;
 export type UpdateNutritionPlanDto = UpdateNutritionPlanRequest;

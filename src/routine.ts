@@ -141,6 +141,46 @@ export interface RoutineSession {
   _isPending?: boolean;
 }
 
+/** Session exercise without media blobs (list / history payloads). */
+export interface RoutineSessionListExercise {
+  exerciseId: string;
+  name: string;
+  restSeconds?: string;
+  sets: Array<{
+    weight: number;
+    reps: number;
+    completed: boolean;
+    isRecord?: boolean;
+    setType?: SetType;
+  }>;
+}
+
+/** Slim session for paginated history (no imageUrl/giftUrl). */
+export interface RoutineSessionListItem {
+  id: string;
+  routineId?: string;
+  routine?: {
+    id: string;
+    title: string;
+  };
+  exercises: RoutineSessionListExercise[];
+  totalTime: number;
+  totalWeight: number;
+  completedSets: number;
+  avgHeartRate?: number | null;
+  maxHeartRate?: number | null;
+  caloriesBurned?: number | null;
+  healthMetricsSource?: string | null;
+  createdAt: string | Date;
+  _isPending?: boolean;
+}
+
+export interface PaginatedRoutineSessions {
+  items: RoutineSessionListItem[];
+  nextCursor: string | null;
+  hasMore: boolean;
+}
+
 /** Lightweight session row for macros burn / TDEE suggestion (no exercises payload). */
 export interface RoutineSessionBurnSummary {
   id: string;
@@ -198,6 +238,8 @@ export type RoutineRequestDto = RoutineRequest;
 export type RoutineResponseDto = RoutineResponse;
 export type RoutineExerciseResponseDto = RoutineExerciseResponse;
 export type RoutineSessionEntity = RoutineSession;
+export type RoutineSessionListItemDto = RoutineSessionListItem;
+export type PaginatedRoutineSessionsDto = PaginatedRoutineSessions;
 export type RoutineSessionRequestDto = RoutineSessionRequest;
 export type RoutineHealthResponseDto = RoutineHealthResponse;
 export type RoutineFolderResponseDto = RoutineFolderResponse;
