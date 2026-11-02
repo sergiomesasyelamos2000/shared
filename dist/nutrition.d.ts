@@ -299,6 +299,16 @@ export interface MappedNutrient {
     label: string;
     value: number | string | undefined | null;
 }
+/** Household / package / unit measure for logging quantity (VirtuaFood-style). */
+export type ProductServingKind = "household" | "gram" | "ml" | "package";
+export interface ProductServingMeasure {
+    id: string;
+    /** Display label, e.g. "1 medium (118 g)". */
+    label: string;
+    /** Gram weight of one unit of this measure. */
+    grams: number;
+    kind: ProductServingKind;
+}
 export interface MappedProduct {
     code: string;
     name: string;
@@ -307,6 +317,10 @@ export interface MappedProduct {
     categories: string | null;
     nutritionGrade: string | null;
     servingSize?: string | null;
+    /** USDA FoodData Central id when known. */
+    fdcId?: number | null;
+    /** Available logging measures (household, package, g, ml). */
+    servings?: ProductServingMeasure[];
     grams: number;
     calories: number;
     carbohydrates: number;
